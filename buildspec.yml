@@ -1,12 +1,18 @@
 version: 0.2
+
 phases:
+
   install:
     runtime-versions:
-      python: 3.9
+      python: 3.8
+
+    commands:
+      - pip3 install awscli aws-sam-cli
+
   build:
     commands:
       # Use AWS SAM to package the application by using AWS CloudFormation
-      - sam build
+      - sam build --use-container
       - sam package  --template template.yml --s3-bucket $S3_BUCKET --output-template-file template-export.yml
 artifacts:
   files:
