@@ -28,11 +28,7 @@ Resources:
       Handler: app.lambda_handler
       Tracing: Active
       Events:
-<<<<<<< HEAD
-        OrgsScan:
-=======
         OrgsApi:
->>>>>>> staging
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs
@@ -48,11 +44,7 @@ Resources:
       Handler: app.lambda_handler
       Tracing: Active
       Events:
-<<<<<<< HEAD
-        OrgsGet:
-=======
         OrgsApi:
->>>>>>> staging
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs/{id}
@@ -67,11 +59,7 @@ Resources:
       Handler: app.lambda_handler
       Tracing: Active
       Events:
-<<<<<<< HEAD
-        OrgsCreate:
-=======
         OrgsApi:
->>>>>>> staging
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs
