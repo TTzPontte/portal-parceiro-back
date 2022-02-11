@@ -55,6 +55,13 @@ cover/
 *.mo
 *.pot
 
+<<<<<<< HEAD
+=======
+*.DS_Store
+*.DS_Store/
+.DS_Store/
+.DS_Store
+>>>>>>> staging
 # Django stuff:
 *.log
 local_settings.py
@@ -120,9 +127,12 @@ ENV/
 env.bak/
 venv.bak/
 
+<<<<<<< HEAD
 
 .DS_Store/
 .DS_Store
+=======
+>>>>>>> staging
 # Spyder project settings
 .spyderproject
 .spyproject
