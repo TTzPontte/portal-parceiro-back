@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'python3.9
+
+  Sample SAM Template for portal-parceiro-backend
+
+  '
+Globals:
+  Function:
+    Runtime: python3.8
+    MemorySize: 1024
+    Timeout: 120
+  Api:
+    Cors:
+      AllowMethods: '''*'''
+      AllowHeaders: '''Authorization,Content-Type,If-Match'''
+      AllowOrigin: '''*'''
+Resources:
+  OrgsScanFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: PP-OrgsScanFn-${Ambiente}
+      Description: Retorna um contrato.
+      CodeUri: OrgsScanFunction
+      Handler: app.lambda_handler
+      Tracing: Active
+      Events:
+        OrgsApi:
+          Type: Api
+          Properties:
+            Path: /orgs
+            Method: get
+    Metadata:
+      SamResourceId: OrgsScanFunction
+  OrgsGetFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: PP-OrgsGetFn-${Ambiente}
+      Description: Retorna um contrato.
+      CodeUri: OrgsGetFunction
+      Handler: app.lambda_handler
+      Tracing: Active
+      Events:
+        OrgsApi:
+          Type: Api
+          Properties:
+            Path: /orgs/{id}
+            Method: get
+    Metadata:
+      SamResourceId: OrgsGetFunction
+  OrgsCreateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName:
+        Fn::Sub: PP-OrgsCreateFn-${Ambiente}
+      Description: Retorna um contrato.
+      CodeUri: OrgsCreateFunction
+      Handler: app.lambda_handler
+      Tracing: Active
+      Events:
+        OrgsApi:
+          Type: Api
+          Properties:
+            Path: /orgs
+            Method: post
+    Metadata:
+      SamResourceId: OrgsCreateFunction
+Outputs:
+  OrgsApi:
+    Description: API Gateway endpoint URL for Prod stage for Hello World function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/orgs/
+  OrgsScanFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - OrgsScanFunction
+      - Arn
+  OrgsScanFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - OrgsScanFunctionRole
+      - Arn
+  OrgsCreateFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - OrgsCreateFunction
+      - Arn
+    OrgsCreateFunctionIamRole:
+      Description: Implicit IAM Role created for Hello World function
+      Value:
+        Fn::GetAtt:
+        - OrgsCreateFunctionRole
+        - Arn
+  OrgsGetFunction:
+    Description: Hello World Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - OrgsGetFunction
+      - Arn
+    OrgsGetFunctionIamRole:
+      Description: Implicit IAM Role created for Hello World function
+      Value:
+        Fn::GetAtt:
+        - OrgsGetFunctionRole
+        - Arn

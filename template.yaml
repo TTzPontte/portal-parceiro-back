@@ -8,61 +8,62 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Runtime: python3.8
+    MemorySize: 1024
+    Timeout: 120
+  Api:
+    Cors:
+      AllowMethods: "'*'"
+      AllowHeaders: "'Authorization,Content-Type,If-Match'"
+      AllowOrigin: "'*'"
 
 Resources:
 
   OrgsScanFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      PackageType: Image
-      Architectures:
-        - x86_64
+      FunctionName: !Sub "PP-OrgsScanFn-${Ambiente}"
+      Description: Retorna um contrato.
+      CodeUri: Apis/Organizations/Scan
+      Handler: app.lambda_handler
+      Tracing: Active
       Events:
-        HelloWorld:
+        OrgsApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs
             Method: get
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./Apis/Organizations/Scan
-      DockerTag: python3.9-v1
 
 
   OrgsGetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      PackageType: Image
-      Architectures:
-        - x86_64
+      FunctionName: !Sub "PP-OrgsGetFn-${Ambiente}"
+      Description: Retorna um contrato.
+      CodeUri: Apis/Organizations/Get
+      Handler: app.lambda_handler
+      Tracing: Active
       Events:
-        HelloWorld:
+        OrgsApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs/{id}
             Method: get
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./Apis/Organizations/Scan
-      DockerTag: python3.9-v1
 
   OrgsCreateFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      PackageType: Image
-      Architectures:
-        - x86_64
+      FunctionName: !Sub "PP-OrgsCreateFn-${Ambiente}"
+      Description: Retorna um contrato.
+      CodeUri: Apis/Organizations/Create
+      Handler: app.lambda_handler
+      Tracing: Active
       Events:
-        HelloWorld:
+        OrgsApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /orgs
             Method: post
-    Metadata:
-      Dockerfile: Dockerfile
-      DockerContext: ./Apis/Organizations/Create
-      DockerTag: python3.9-v1
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
