@@ -7,7 +7,7 @@ phases:
       python: 3.8
 
     commands:
-      - pip3 install awscli aws-sam-cli
+      - python3 -m pip3 install awscli aws-sam-cli
 
   build:
     commands:

@@ -126,6 +126,16 @@ venv.bak/
 .DS_Store/
 .DS_Store
 
+.idea/*
+.idea/
+.idea
+*.idea
+*.idea/
+.idea/misc.xml
+
+.aws-sam/
+.aws-sam
+
 # Spyder project settings
 .spyderproject
 .spyproject

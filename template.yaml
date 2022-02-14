@@ -5,10 +5,17 @@ Description: >
 
   Sample SAM Template for portal-parceiro-backend
 
+Parameters:
+  Environment:
+    Type: String
+    Default: dev
+
+
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Runtime: python3.9
+    Runtime: python3.8
     MemorySize: 1024
     Timeout: 120
   Api:
@@ -22,7 +29,7 @@ Resources:
   OrgsScanFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      FunctionName: !Sub "PP-OrgsScanFn-${Ambiente}"
+      FunctionName: !Sub "PP-OrgsScanFn-${Environment}"
       Description: Retorna um contrato.
       CodeUri: Apis/Organizations/Scan
       Handler: app.lambda_handler
@@ -38,7 +45,7 @@ Resources:
   OrgsGetFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      FunctionName: !Sub "PP-OrgsGetFn-${Ambiente}"
+      FunctionName: !Sub "PP-OrgsGetFn-${Environment}"
       Description: Retorna um contrato.
       CodeUri: Apis/Organizations/Get
       Handler: app.lambda_handler
@@ -53,7 +60,7 @@ Resources:
   OrgsCreateFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      FunctionName: !Sub "PP-OrgsCreateFn-${Ambiente}"
+      FunctionName: !Sub "PP-OrgsCreateFn-${Environment}"
       Description: Retorna um contrato.
       CodeUri: Apis/Organizations/Create
       Handler: app.lambda_handler
